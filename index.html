@@ -13,7 +13,6 @@
             margin: 0;
             background-color: #f0f0f0;
         }
-
         #container {
             background-color: white;
             padding: 20px;
@@ -21,13 +20,12 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-
         #canvas {
             max-width: 800px;
             max-height: 600px;
             border: 1px solid black;
         }
-        #result{
+        #result {
             margin-top: 10px;
         }
     </style>
@@ -50,7 +48,7 @@
             const formData = new FormData();
             formData.append('image', imageFile);
 
-            fetch('http://127.0.0.1:5000/predict', { // Replace with your Flask app's URL
+            fetch('http://127.0.0.1:5000/predict', {
                 method: 'POST',
                 body: formData
             })
@@ -67,14 +65,23 @@
                             data.detections.forEach(detection => {
                                 ctx.strokeStyle = 'red';
                                 ctx.lineWidth = 3;
-                                ctx.strokeRect(detection.bbox[0], detection.bbox[1], detection.bbox[2] - detection.bbox[0], detection.bbox[3] - detection.bbox[1]);
+                                ctx.strokeRect(
+                                    detection.bbox[0],
+                                    detection.bbox[1],
+                                    detection.bbox[2] - detection.bbox[0],
+                                    detection.bbox[3] - detection.bbox[1]
+                                );
                                 ctx.fillStyle = 'red';
                                 ctx.font = "16px Arial";
-                                ctx.fillText(detection.class + " " + (detection.confidence * 100).toFixed(0) + "%", detection.bbox[0], detection.bbox[1] - 10);
+                                ctx.fillText(
+                                    detection.class + " " + (detection.confidence * 100).toFixed(0) + "%",
+                                    detection.bbox[0],
+                                    detection.bbox[1] - 10
+                                );
                             });
                         };
                         img.src = event.target.result;
-                    }
+                    };
                     reader.readAsDataURL(imageFile);
                 } else if (data.error) {
                     resultDiv.innerText = `Error: ${data.error}`;
