@@ -1,0 +1,7 @@
+roboflow
+boto3
+ultralytics
+python-dotenv
+flask
+flask-cors
+pillow
