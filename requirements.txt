@@ -1,3 +1,4 @@
 roboflow
+boto3
 ultralytics
 python-dotenv
